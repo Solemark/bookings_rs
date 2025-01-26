@@ -1,40 +1,35 @@
-use crate::types::{Booking, Bookings, Msg};
 use iced::widget::{button, checkbox, column, row, text, text_input};
-use iced::{Element, Sandbox, Theme};
+use iced::Element;
 use std::process::exit;
 
-impl Sandbox for Bookings {
-    type Message = Msg;
+use crate::bookings::Bookings;
 
-    fn new() -> Self {
-        Self {
-            booking: Booking {
-                id: 0,
-                area: 0,
-                weeks: 0,
-                rooms: 0,
-                address: String::new(),
-                date: String::new(),
-                phone: String::new(),
-                owner: String::new(),
-                alarm: false,
-                maintenance: false,
-            },
-            bookings: Vec::new(),
-            tbox: String::new(),
-        }
-    }
+pub fn run() -> iced::Result {
+    iced::run("Booking System v1", Bookings::update, Bookings::view)
+}
 
-    fn title(&self) -> String {
-        String::from("Booking System v1")
-    }
+#[derive(Debug, Clone)]
+enum Msg {
+    Submit,
+    Update,
+    List,
+    Clear,
+    Exit,
+    ID(String),
+    Area(String),
+    Weeks(String),
+    Rooms(String),
+    Address(String),
+    Date(String),
+    Phone(String),
+    Name(String),
+    Alarm(bool),
+    Maintenance(bool),
+}
 
-    fn theme(&self) -> Theme {
-        Theme::Dark
-    }
-
-    fn update(&mut self, message: Msg) {
-        match message {
+impl Bookings {
+    fn update(&mut self, msg: Msg) {
+        match msg {
             Msg::Submit => {
                 self.bookings.push(self.booking.clone());
                 self.update(Msg::Clear);

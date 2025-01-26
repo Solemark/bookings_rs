@@ -1,25 +1,26 @@
-pub(crate) struct Bookings {
-    pub(crate) booking: Booking,
-    pub(crate) bookings: Vec<Booking>,
-    pub(crate) tbox: String,
+#[derive(Default)]
+pub struct Bookings {
+    pub booking: Booking,
+    pub bookings: Vec<Booking>,
+    pub tbox: String,
 }
 
-#[derive(Debug, Clone)]
-pub(crate) struct Booking {
-    pub(crate) id: usize,
-    pub(crate) area: u32,
-    pub(crate) weeks: u32,
-    pub(crate) rooms: u32,
-    pub(crate) address: String,
-    pub(crate) date: String,
-    pub(crate) phone: String,
-    pub(crate) owner: String,
-    pub(crate) alarm: bool,
-    pub(crate) maintenance: bool,
+#[derive(Debug, Clone, Default)]
+pub struct Booking {
+    pub id: usize,
+    pub area: u32,
+    pub weeks: u32,
+    pub rooms: u32,
+    pub address: String,
+    pub date: String,
+    pub phone: String,
+    pub owner: String,
+    pub alarm: bool,
+    pub maintenance: bool,
 }
 
 impl Booking {
-    pub(crate) fn clear(&mut self) {
+    pub fn clear(&mut self) {
         self.id = 0;
         self.area = 0;
         self.weeks = 0;
@@ -32,35 +33,35 @@ impl Booking {
         self.maintenance = false;
     }
 
-    pub(crate) fn get_id(&self) -> String {
+    pub fn get_id(&self) -> String {
         if self.id == 0 {
             return String::new();
         }
         format!("{}", self.id)
     }
 
-    pub(crate) fn get_area(&self) -> String {
+    pub fn get_area(&self) -> String {
         if self.area == 0 {
             return String::new();
         }
         format!("{}", self.area)
     }
 
-    pub(crate) fn get_weeks(&self) -> String {
+    pub fn get_weeks(&self) -> String {
         if self.weeks == 0 {
             return String::new();
         }
         format!("{}", self.weeks)
     }
 
-    pub(crate) fn get_rooms(&self) -> String {
+    pub fn get_rooms(&self) -> String {
         if self.rooms == 0 {
             return String::new();
         }
         format!("{}", self.rooms)
     }
 
-    pub(crate) fn get_booking(&self) -> String {
+    pub fn get_booking(&self) -> String {
         format!(
             "id: {}, area: {}, weeks: {}, rooms: {}, address: {}, date: {}, phone: {}, owner: {}, alarm: {}, pool: {}",
             self.id,
@@ -75,23 +76,4 @@ impl Booking {
             self.maintenance,
         )
     }
-}
-
-#[derive(Debug, Clone)]
-pub(crate) enum Msg {
-    Submit,
-    Update,
-    List,
-    Clear,
-    Exit,
-    ID(String),
-    Area(String),
-    Weeks(String),
-    Rooms(String),
-    Address(String),
-    Date(String),
-    Phone(String),
-    Name(String),
-    Alarm(bool),
-    Maintenance(bool),
 }
