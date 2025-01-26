@@ -8,6 +8,7 @@ fi
 # build file
 cargo build --release
 
+# move the binary to the build folder and cleanup target/release
 if [ -f target/release/bookings_rs ]
   then mv target/release/bookings_rs build/bookings
     rm -rf target/release
